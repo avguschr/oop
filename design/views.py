@@ -11,3 +11,4 @@ class RegisterUserView(CreateView):
     template_name = 'auth/register.html'
     form_class = RegisterForm
     success_url = reverse_lazy('design:index')
+
