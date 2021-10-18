@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -8,10 +9,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from .models import *
 from .forms import *
-
-
-def index(request):
-    return render(request, 'index.html')
 
 
 class RegisterUserView(CreateView):
@@ -27,7 +24,7 @@ class LoginUserView(LoginView):
     success_url = reverse_lazy('design:index')
 
     def get_success_url(self):
-        return reverse_lazy('design:index')
+        return reverse_lazy('design:profile')
 
 
 class LogoutUserView(LoginRequiredMixin, LogoutView):
@@ -46,3 +43,8 @@ class BidsView(ListView):
 
     def get_queryset(self):
         return Bid.objects.order_by('-date')
+
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

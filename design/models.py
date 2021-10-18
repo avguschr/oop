@@ -23,7 +23,6 @@ class Category(models.Model):
         return self.name
 
 
-
 class Bid(models.Model):
     new = 'new'
     accepted = 'accepted'

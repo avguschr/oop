@@ -18,14 +18,23 @@
     <a class="nav-link active" href="/design/register">Регистрация</a>
   </li>
 
-  <li class="nav-item">
-    <a class="nav-link" href="/design/login">Вход</a>
-  </li>
         {% if user.is_authenticated %}
   <li class="nav-item">
     <a class="nav-link" href="/design/logout">Выход</a>
   </li>
+            {% else %}
+              <li class="nav-item">
+    <a class="nav-link" href="/design/login">Вход</a>
+  </li>
          {% endif %}
+
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Пользователь</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Профиль</a>
+      <a class="dropdown-item" href="#">Редактировать</a>
+    </div>
+  </li>
 </ul>
 </div>
 
