@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery="slim" %}
+
+
+{% load static %}
+
+{% block title %} Register {% endblock %}
+{% block content %}
+
+<h1>Главная страница</h1>
+
+{% for bid in bids %}
+    <hr>
+    <h2>{{ bid.name }}</h2>
+    <p>{{ bid.date }}</p>
+    <p>{{ bid.author }}</p>
+    <p>{{ bid.description }}</p>
+    <p>{{ bid.img }}</p>
+    <img src="/{{ bid.img.url }}">
+    <p>{{ bid.status }}</p>
+    <hr>
+{% endfor %}
+
+{% endblock %}
