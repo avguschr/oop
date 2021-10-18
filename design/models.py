@@ -37,10 +37,10 @@ class Bid(models.Model):
     name = models.CharField(max_length=128, null=False, verbose_name='Название')
     description = models.TextField(null=False, verbose_name='Описание')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, null=False, verbose_name='Категория')
-    img = models.ImageField(upload_to='design/static/images/', null=False, verbose_name='Изображение')
+    img = models.ImageField(upload_to='static/images/', null=False, max_length=200, verbose_name='Изображение')
     status = models.CharField(max_length=128, choices=status_choices, default=new, verbose_name='Статус')
     author = models.ForeignKey('User', on_delete=models.CASCADE, null=False, verbose_name='Автор')
-    date = models.DateField(auto_now_add=True, blank=True, verbose_name='Дата', null=False)
+    date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name='Дата', null=False)
 
     class Meta:
         verbose_name = 'Заявка'

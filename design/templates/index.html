@@ -17,8 +17,7 @@
     <p>{{ bid.date }}</p>
     <p>{{ bid.author }}</p>
     <p>{{ bid.description }}</p>
-    <p>{{ bid.img }}</p>
-    <img src="/{{ bid.img.url }}">
+    <img src="{{ bid.img.url }}">
     <p>{{ bid.status }}</p>
     <hr>
 {% endfor %}

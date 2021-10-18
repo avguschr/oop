@@ -5,3 +5,4 @@ django-bootstrap4==3.0.1
 pytz==2021.3
 soupsieve==2.2.1
 sqlparse==0.4.2
+pillow==8.4.0

@@ -10,10 +10,8 @@ from .models import *
 from .forms import *
 
 
-
 def index(request):
     return render(request, 'index.html')
-
 
 
 class RegisterUserView(CreateView):
@@ -21,7 +19,6 @@ class RegisterUserView(CreateView):
     template_name = 'auth/register.html'
     form_class = RegisterForm
     success_url = reverse_lazy('design:index')
-
 
 
 class LoginUserView(LoginView):
@@ -37,6 +34,7 @@ class LogoutUserView(LoginRequiredMixin, LogoutView):
     model = User
     template_name = 'auth/logout.html'
     success_url = reverse_lazy('design:index')
+
     def get_success_url(self):
         return reverse_lazy('design:index')
 
@@ -46,5 +44,5 @@ class BidsView(ListView):
     template_name = 'index.html'
     context_object_name = 'bids'
 
-    #
-
+    def get_queryset(self):
+        return Bid.objects.order_by('-date')
