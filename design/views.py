@@ -46,3 +46,5 @@ class BidsView(ListView):
     template_name = 'index.html'
     context_object_name = 'bids'
 
+    #
+
