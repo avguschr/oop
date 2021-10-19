@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery="slim" %}
 
-</body>
-</html>
+
+{% load static %}
+
+{% block title %} Profile {% endblock %}
+{% block content %}
+
+<h1>Профиль</h1>
+<h2>{{ user }}</h2>
+
+
+<form method='get'>
+    {% csrf_token %}
+    <select name=status>
+    <option value=new>Новая</option>
+    <option value=accepted>Принято в работу</option>
+        <option value=completed>Выполнено</option>
+</select>
+    {% buttons submit='Применить' type='submit' %} {% endbuttons %}
+</form>
+
+
+{% if bids %}
+{% for bid in bids %}
+{% if bid.author == user %}
+    <hr>
+    <h2>{{ bid.name }}</h2>
+    <p>{{ bid.date }}</p>
+    <p>{{ bid.author }}</p>
+    <p>{{ bid.category }}</p>
+    <p>{{ bid.description }}</p>
+    <img src="{{ bid.img.url }}">
+    <p>{{ bid.status }}</p>
+    <a class="btn btn-primary" href="/design/{{bid.id}}/deleteBid" role="button">Удалить</a>
+    <hr>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% endblock %}

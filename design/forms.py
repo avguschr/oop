@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, Bid, Category
 from django import forms
 
 
@@ -20,3 +20,17 @@ class RegisterForm(UserCreationForm):
         )
 
 
+
+class BidCreateForm(forms.ModelForm):
+    name = forms.CharField(label='Название', max_length=128, help_text='Обязательное поле. Не более 128 символов.')
+    description = forms.CharField( max_length=1000, label='Описание', help_text='Обязательное поле.')
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    img = forms.ImageField()
+    class Meta:
+        model = Bid
+        fields = (
+            'name',
+            'description',
+            'category',
+            'img'
+        )

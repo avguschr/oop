@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery="slim" %}
+
+
+{% load static %}
+
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <p>Вы уверены что хотите удалить заявку?</p>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock %}
