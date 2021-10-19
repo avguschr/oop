@@ -15,12 +15,12 @@
 
 <form method='get'>
     {% csrf_token %}
-    <select name=status>
-    <option value=new>Новая</option>
-    <option value=accepted>Принято в работу</option>
-        <option value=completed>Выполнено</option>
+<select name=status class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+  <option value=new>Новая</option>
+  <option value=accepted>Принято в работу</option>
+  <option value=completed>Выполнено</option>
 </select>
-    {% buttons submit='Применить' type='submit' %} {% endbuttons %}
+{% buttons submit='Применить' type='submit' %} {% endbuttons %}
 </form>
 
 
@@ -35,7 +35,9 @@
     <p>{{ bid.description }}</p>
     <img src="{{ bid.img.url }}">
     <p>{{ bid.status }}</p>
-    <a class="btn btn-primary" href="/design/{{bid.id}}/deleteBid" role="button">Удалить</a>
+    {% if bid.status == 'new' %}
+        <a class="btn btn-primary" href="/design/{{bid.id}}/deleteBid" role="button">Удалить</a>
+    {% endif %}
     <hr>
 {% endif %}
 {% endfor %}
