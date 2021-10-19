@@ -10,5 +10,5 @@ urlpatterns = [
     path('logout', views.LogoutUserView.as_view(), name='logout'),
     path('profile', login_required(views.ProfileView.as_view(), login_url='/design/login'), name='profile'),
     path('createBid', login_required(views.CreateBidView.as_view(), login_url='/design/login'), name='createBid'),
-    path('<int:pk>/deleteBid', views.DeleteBidView.as_view(), name='deleteBid')
+    path('<int:pk>/deleteBid', views.DeleteBidView.as_view(), name='deleteBid')g
 ]
