@@ -45,7 +45,7 @@ class BidsView(ListView):
     context_object_name = 'bids'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(**kwargs).get_context_data(**kwargs)
         context['count'] = Bid.objects.all().filter(status='accepted').count()
         return context
 
@@ -78,10 +78,13 @@ class DeleteBidView(DeleteView):
     model = Bid
     template_name = 'bids/deleteBid.html'
 
-    def get_object(self, queryset=None):
-        if not queryset:
-            queryset = self.get_queryset().filter(status='new')
-        return get_object_or_404(queryset)
+    def get_object(self):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        bid = Bid.objects.get(pk=pk)
+        if bid.status == 'new':
+            return bid
+        else:
+            raise Http404
 
     def get_success_url(self):
         return reverse_lazy('design:profile')
@@ -92,8 +95,9 @@ class ProfileView(ListView):
     template_name = 'profile.html'
     context_object_name = 'bids'
 
-    def profile(self, request):
+    def get_user(self, request):
         user = request.user.username
+        return user
 
     def get_queryset(self):
         if not self.request.GET:

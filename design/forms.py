@@ -34,3 +34,4 @@ class BidCreateForm(forms.ModelForm):
             'category',
             'img'
         )
+
