@@ -31,6 +31,11 @@
           <a class="nav-link" href="/design/createBid">Создать заявку</a>
         </li>
           {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+      <li class="nav-item">
+          <a class="nav-link" href="/design/admin">Админ</a>
+        </li>
+      {% endif %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{ user.username }}
@@ -40,6 +45,7 @@
             <li><a class="dropdown-item" href="/design/logout">Выход</a></li>
           </ul>
         </li>
+
               {% else %}
               <li class="nav-item">
           <a class="nav-link" href="/design/login">Вход</a>
@@ -48,6 +54,7 @@
           <a class="nav-link" href="/design/register">Регистрация</a>
         </li>
           {% endif %}
+
       </ul>
     </div>
   </div>
@@ -57,5 +64,6 @@
 {% block content %}
 
 {% endblock %}
+
 </body>
 </html>

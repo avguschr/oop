@@ -20,12 +20,13 @@ class RegisterForm(UserCreationForm):
         )
 
 
-
 class BidCreateForm(forms.ModelForm):
-    name = forms.CharField(label='Название', max_length=128, help_text='Обязательное поле. Не более 128 символов.')
-    description = forms.CharField( max_length=1000, label='Описание', help_text='Обязательное поле.')
-    category = forms.ModelChoiceField(queryset=Category.objects.all())
-    img = forms.ImageField()
+    name = forms.CharField(label='Название', max_length=128, help_text='Обязательное поле. Не более 128 символов.',
+                           required=True)
+    description = forms.CharField(max_length=1000, label='Описание', help_text='Обязательное поле.', required=True)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True)
+    img = forms.ImageField(required=True)
+
     class Meta:
         model = Bid
         fields = (
@@ -34,4 +35,5 @@ class BidCreateForm(forms.ModelForm):
             'category',
             'img'
         )
+
 

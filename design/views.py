@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -53,7 +55,6 @@ class BidsView(ListView):
         return Bid.objects.order_by('-date')[:4]
 
 
-
 class CreateBidView(CreateView, LoginRequiredMixin):
     model = Bid
 
@@ -78,13 +79,13 @@ class DeleteBidView(DeleteView):
     model = Bid
     template_name = 'bids/deleteBid.html'
 
-    def get_object(self):
+    def get_object(self, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         bid = Bid.objects.get(pk=pk)
         if bid.status == 'new':
             return bid
         else:
-            raise Http404
+            raise PermissionDenied()
 
     def get_success_url(self):
         return reverse_lazy('design:profile')
@@ -104,3 +105,40 @@ class ProfileView(ListView):
             return Bid.objects.order_by('-date')
         else:
             return Bid.objects.filter(status=self.request.GET['status']).order_by('-date')
+
+
+class AdminView(ListView):
+    model = Bid
+    template_name = 'admin/admin.html'
+    context_object_name = 'bids'
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Bid.objects.all().order_by('-date')
+        else:
+            raise PermissionDenied()
+
+
+class UpdateBidView(UpdateView):
+    model = Bid
+    template_name = 'admin/updateBid.html'
+    fields = [
+        'status',
+        'img_design',
+        'comment'
+    ]
+
+    def get_object(self, **kwargs):
+        if self.request.user.is_superuser:
+            pk = self.kwargs.get(self.pk_url_kwarg)
+            bid = Bid.objects.get(pk=pk)
+            return bid
+        else:
+            raise PermissionDenied()
+
+    def form_valid(self, form):
+        form.instance.author = form.instance.author
+        return super(UpdateBidView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('design:admin')
