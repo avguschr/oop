@@ -1,23 +1,13 @@
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.core.exceptions import PermissionDenied
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import CreateView
-from django.views.generic.edit import DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
-from .models import *
+
 from .forms import *
-
-
 
 
 class RegisterUserView(CreateView):
@@ -36,7 +26,7 @@ class LoginUserView(LoginView):
         return reverse_lazy('design:profile')
 
 
-class LogoutUserView(LoginRequiredMixin, LogoutView):
+class LogoutUserView(LogoutView):
     model = User
     template_name = 'auth/logout.html'
     success_url = reverse_lazy('design:index')

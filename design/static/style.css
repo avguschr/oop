@@ -1,11 +1,85 @@
-img {
-    max-width: 500px;
-}
+/*img {*/
+/*    max-width: 500px;*/
+/*}*/
 
 body {
-
+    background-color: #848682;
 }
 
-p {
+.navbar {
+    background-color: #283033 !important;
+}
 
+.navbar li, a {
+    font-family: "Century Gothic", sans-serif !important;
+}
+
+.dropdown-menu a {
+    color: #283033 !important;
+}
+
+.header {
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    height: 900px;
+    margin-bottom: 100px;
+    background-image: url("images/ph2.jpeg");
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header .header_text {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 50px;
+    color: white;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.header .count {
+    border-bottom: solid white 1px;
+    margin-bottom: 60px;
+}
+
+.header .count p{
+    font-family: "Century Gothic", sans-serif;
+    font-size: 60px;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.header .for_text {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.header .for_text a {
+    font-size: 30px;
+}
+
+.header .design_text {
+    color: white;
+    font-size: 150px;
+    margin: 0;
+}
+
+.header .btn {
+    font-family: "Century Gothic", sans-serif !important;
+}
+
+h2 {
+    font-size: 50px;
+    text-align: center;
+}
+
+.bids {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

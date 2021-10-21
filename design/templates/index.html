@@ -8,23 +8,48 @@
 
 {% block title %} Home {% endblock %}
 {% block content %}
+    <div class="header">
+        <div class="for_text">
+            <p class="design_text">Design.pro</p>
+            <p class="header_text">— дизайн-студия <br> по созданию и оформлению <br> интерьеров жилых помещений.</p>
+            <div class="count d-inline">
+                <p class="d-inline">Заявок принято в работу: {{ count }}</p class="d-inline">
+            </div>
+            <div class="d-flex justify-content-start">
+                <a class="btn btn-outline-light " href="/design/createBid" role="button">Создать заявку</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2>Выполненные заявки</h2>
+    </div>
+    <div class="bids">
+        {% if bids %}
+            {% for bid in bids %}
+                <div class="card w-50">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                    <img src="{{ bid.img.url }}" class="card-img-bottom" alt="...">
+                </div>
+                {% if bid.status == 'completed' %}
+                    <h2>{{ bid.name }}</h2>
+                    <p>{{ bid.date }}</p>
+                    <p>{{ bid.author }}</p>
+                    <p>{{ bid.category }}</p>
+                    <p>{{ bid.description }}</p>
+                    <img src="{{ bid.img.url }}">
+                    <p>{{ bid.status }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 
-<h1>Главная страница</h1>
-<h2>Принято в работу {{ count }}</h2>
-{% if bids %}
-{% for bid in bids %}
-    {% if bid.status == 'completed' %}
-    <hr>
-    <h2>{{ bid.name }}</h2>
-    <p>{{ bid.date }}</p>
-    <p>{{ bid.author }}</p>
-    <p>{{ bid.category }}</p>
-    <p>{{ bid.description }}</p>
-    <img src="{{ bid.img.url }}">
-    <p>{{ bid.status }}</p>
-    <hr>
-    {% endif %}
-{% endfor %}
-{% endif %}
+
+
+
 
 {% endblock %}
