@@ -10,6 +10,7 @@
 {% block content %}
 
 <h1>Категории</h1>
+<a class="btn btn-primary" href="/design/createCategory" role="button">Добавить категорию</a>
 {% if categories %}
 {% for cat in categories %}
     <hr>
@@ -19,6 +20,6 @@
     <hr>
 {% endfor %}
 {% endif %}
-    <a class="btn btn-primary" href="/design/createCategory" role="button">Добавить категорию</a>
+
 {% endblock %}
 
