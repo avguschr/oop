@@ -6,6 +6,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import CreateView
 from django.views.generic.edit import DeleteView, UpdateView
 from django.contrib.auth.views import LoginView
@@ -14,6 +16,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from .models import *
 from .forms import *
+
+
 
 
 class RegisterUserView(CreateView):
@@ -127,6 +131,13 @@ class UpdateBidView(UpdateView):
         'img_design',
         'comment'
     ]
+    def post(self, request, **kwargs):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        bid = Bid.objects.get(pk=pk)
+        if bid.status == 'accepted':
+            request.POST = request.POST.copy()
+            request.POST['comment'] = bid.comment
+        return super(UpdateBidView, self).post(request, **kwargs)
 
     def get_object(self, **kwargs):
         if self.request.user.is_superuser:
@@ -142,3 +153,33 @@ class UpdateBidView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('design:admin')
+
+
+class CreateCategoryView(CreateView):
+    model = Category
+    template_name = 'admin/createCategory.html'
+    fields = (
+        'name',
+    )
+
+    def get_success_url(self):
+        return reverse_lazy('design:category')
+
+
+class CategoryView(ListView):
+    model = Category
+    template_name = 'admin/category.html'
+    context_object_name = 'categories'
+
+
+
+class DeleteCategoryView(DeleteView):
+    model = Category
+    template_name = 'admin/deleteCategory.html'
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        category = Category.objects.get(pk=pk)
+        return category
+
+    def get_success_url(self):
+        return reverse_lazy('design:category')

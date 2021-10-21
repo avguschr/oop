@@ -6,12 +6,12 @@
 
 {% load static %}
 
-{% block title %} Delete Bid {% endblock %}
+{% block title %} Delete Category {% endblock %}
 {% block content %}
 
 <form method="post">
     {% csrf_token %}
-    <p>Вы уверены что хотите удалить заявку?</p>
+    <p>Вы уверены что хотите удалить категорию?</p>
     {% buttons submit='Да' type='submit' %} {% endbuttons %}
 </form>
 

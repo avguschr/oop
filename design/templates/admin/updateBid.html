@@ -29,7 +29,7 @@
 
     <textarea name="comment" id="comment" class="form-control" placeholder="Введите комментарий здесь"></textarea>
 
-    <input type="file" class="form-control" id="img">
+    <input type="file" name="img_design" class="form-control" id="img">
 
     {% buttons submit='Отправить' type='submit' %} {% endbuttons %}
 </form>
@@ -46,10 +46,12 @@
             case 'accepted':
                 comment.style.display = 'block'
                 img.style.display = 'none'
+                comment.required = true
                 break
             case 'completed':
                 img.style.display = 'block'
                 comment.style.display = 'none'
+                img.required = true
                 break
             case 'new':
                 comment.style.display = 'none'

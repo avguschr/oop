@@ -37,3 +37,4 @@ class BidCreateForm(forms.ModelForm):
         )
 
 
+

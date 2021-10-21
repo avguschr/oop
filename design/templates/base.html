@@ -32,9 +32,18 @@
         </li>
           {% if user.is_authenticated %}
                     {% if user.is_superuser %}
-      <li class="nav-item">
-          <a class="nav-link" href="/design/admin">Админ</a>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Админ
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/design/admin">Редактировать заявки</a></li>
+            <li><a class="dropdown-item" href="/design/category">Категории</a></li>
+          </ul>
         </li>
+
       {% endif %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
