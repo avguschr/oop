@@ -121,6 +121,7 @@ class UpdateBidView(UpdateView):
         'img_design',
         'comment'
     ]
+
     def post(self, request, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         bid = Bid.objects.get(pk=pk)
@@ -162,10 +163,10 @@ class CategoryView(ListView):
     context_object_name = 'categories'
 
 
-
 class DeleteCategoryView(DeleteView):
     model = Category
     template_name = 'admin/deleteCategory.html'
+
     def get_object(self, **kwargs):
         pk = self.kwargs.get(self.pk_url_kwarg)
         category = Category.objects.get(pk=pk)
