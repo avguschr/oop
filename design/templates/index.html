@@ -8,44 +8,52 @@
 
 {% block title %} Home {% endblock %}
 {% block content %}
-    <div class="header">
-        <div class="for_text">
+    <div class="header container">
+        <div class="row">
+        <div class="for_text col-12">
             <p class="design_text">Design.pro</p>
-            <p class="header_text">— дизайн-студия <br> по созданию и оформлению <br> интерьеров жилых помещений.</p>
+            <p class="header_text">— дизайн-студия <br> по созданию и оформлению <br> интерьеров жилых помещений</p>
             <div class="count d-inline">
-                <p class="d-inline">Заявок принято в работу: {{ count }}</p class="d-inline">
+                <p class="d-inline text-decoration-underline">Заявок принято в работу: {{ count }}</p>
             </div>
             <div class="d-flex justify-content-start">
                 <a class="btn btn-outline-light " href="/design/createBid" role="button">Создать заявку</a>
             </div>
         </div>
     </div>
-    <div>
-        <h2>Выполненные заявки</h2>
     </div>
-    <div class="bids">
-        {% if bids %}
+    <div class="container bids">
+        <h2 class="title">Выполненные заявки</h2>
+    </div>
+    <div class=" container">
+
+        <div class="row row-cols-1 row-cols-md-1 g-4">
+             {% if bids %}
             {% for bid in bids %}
-                <div class="card w-50">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                    <img src="{{ bid.img.url }}" class="card-img-bottom" alt="...">
-                </div>
-                {% if bid.status == 'completed' %}
-                    <h2>{{ bid.name }}</h2>
-                    <p>{{ bid.date }}</p>
-                    <p>{{ bid.author }}</p>
-                    <p>{{ bid.category }}</p>
-                    <p>{{ bid.description }}</p>
-                    <img src="{{ bid.img.url }}">
-                    <p>{{ bid.status }}</p>
-                {% endif %}
+        {% if bid.status == 'completed' %}
+  <div class="col">
+    <div class="card">
+      <img src="{{ bid.img_design.url }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-center fs-1">{{ bid.name }}</h5>
+          <p class="text-muted fs-4">{{ bid.date }}</p>
+          <p class="card-text fs-4">Автор: {{ bid.author }}</p>
+        <p class="card-text fs-2">{{ bid.description }}</p>
+          <p class="card-text fs-4">Категория: {{ bid.category }}</p>
+      </div>
+    </div>
+
+  </div>
+{% endif %}
             {% endfor %}
         {% endif %}
+</div>
+
+
+
+
+
+
     </div>
 
 

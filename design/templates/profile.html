@@ -23,7 +23,7 @@
 {% buttons submit='Применить' type='submit' %} {% endbuttons %}
 </form>
 
-
+<div class="container">
 {% if bids %}
 {% for bid in bids %}
 {% if bid.author == user %}
@@ -42,5 +42,5 @@
 {% endif %}
 {% endfor %}
 {% endif %}
-
+</div>
 {% endblock %}
