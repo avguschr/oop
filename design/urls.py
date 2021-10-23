@@ -14,7 +14,13 @@ urlpatterns = [
     path('<int:pk>/deleteBid', views.DeleteBidView.as_view(), name='deleteBid'),
     path('admin', views.AdminView.as_view(), name='admin'),
     path('<int:pk>/updateBid', views.UpdateBidView.as_view(), name='updateBid'),
-    path('createCategory', user_passes_test(lambda u: u.is_superuser, login_url='/design/login')(views.CreateCategoryView.as_view()), name='createCategory'),
-    path('category', user_passes_test(lambda u: u.is_superuser, login_url='/design/login')(views.CategoryView.as_view()), name='category'),
-    path('<int:pk>/deleteCategory', user_passes_test(lambda u: u.is_superuser, login_url='/design/login')(views.DeleteCategoryView.as_view()), name='deleteCategory')
+    path('createCategory',
+         user_passes_test(lambda u: u.is_superuser, login_url='/design/login')(views.CreateCategoryView.as_view()),
+         name='createCategory'),
+    path('category',
+         user_passes_test(lambda u: u.is_superuser, login_url='/design/login')(views.CategoryView.as_view()),
+         name='category'),
+    path('<int:pk>/deleteCategory',
+         user_passes_test(lambda u: u.is_superuser, login_url='/design/login')(views.DeleteCategoryView.as_view()),
+         name='deleteCategory')
 ]

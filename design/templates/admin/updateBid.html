@@ -9,59 +9,59 @@
 {% block title %} Update bid {% endblock %}
 {% block content %}
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <select id="select" name='status' class="form-select" aria-label="Default select example">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <select id="select" name='status' class="form-select" aria-label="Default select example">
 
-        {% if bid.status == 'new' %}
-            <option value='new'>Новая</option>
-            <option value='accepted'>Принято в работу</option>
-            <option value='completed'>Выполнено</option>
-        {% endif %}
-    {% if bid.status == 'accepted' %}
-            <option value='accepted'>Принято в работу</option>
-            <option value='completed'>Выполнено</option>
-        {% endif %}
-    {% if bid.status == 'completed' %}
-            <option value='completed'>Выполнено</option>
-        {% endif %}
-    </select>
+            {% if bid.status == 'new' %}
+                <option value='new'>Новая</option>
+                <option value='accepted'>Принято в работу</option>
+                <option value='completed'>Выполнено</option>
+            {% endif %}
+            {% if bid.status == 'accepted' %}
+                <option value='accepted'>Принято в работу</option>
+                <option value='completed'>Выполнено</option>
+            {% endif %}
+            {% if bid.status == 'completed' %}
+                <option value='completed'>Выполнено</option>
+            {% endif %}
+        </select>
 
-    <textarea name="comment" id="comment" class="form-control" placeholder="Введите комментарий здесь"></textarea>
+        <textarea name="comment" id="comment" class="form-control" placeholder="Введите комментарий здесь"></textarea>
 
-    <input type="file" name="img_design" class="form-control" id="img">
+        <input type="file" name="img_design" class="form-control" id="img">
 
-    {% buttons submit='Отправить' type='submit' %} {% endbuttons %}
-</form>
+        {% buttons submit='Отправить' type='submit' %} {% endbuttons %}
+    </form>
 
-<script>
-    comment = document.getElementById('comment')
-    img = document.getElementById('img')
-    select = document.getElementById('select')
-    comment.style.display = 'none'
-    img.style.display = 'none'
-    select.onchange = () => {
-        let selectedValue = select.options[select.selectedIndex].value
-        switch (selectedValue) {
-            case 'accepted':
-                comment.style.display = 'block'
-                img.style.display = 'none'
-                comment.required = true
-                break
-            case 'completed':
-                img.style.display = 'block'
-                comment.style.display = 'none'
-                img.required = true
-                break
-            case 'new':
-                comment.style.display = 'none'
-                img.style.display = 'none'
-                break
-            default:
-                break
+    <script>
+        comment = document.getElementById('comment')
+        img = document.getElementById('img')
+        select = document.getElementById('select')
+        comment.style.display = 'none'
+        img.style.display = 'none'
+        select.onchange = () => {
+            let selectedValue = select.options[select.selectedIndex].value
+            switch (selectedValue) {
+                case 'accepted':
+                    comment.style.display = 'block'
+                    img.style.display = 'none'
+                    comment.required = true
+                    break
+                case 'completed':
+                    img.style.display = 'block'
+                    comment.style.display = 'none'
+                    img.required = true
+                    break
+                case 'new':
+                    comment.style.display = 'none'
+                    img.style.display = 'none'
+                    break
+                default:
+                    break
+            }
+
         }
-
-    }
-</script>
+    </script>
 {% endblock %}
 

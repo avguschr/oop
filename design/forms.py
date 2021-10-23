@@ -5,12 +5,14 @@ from django import forms
 from django.core import validators
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 class RegisterForm(UserCreationForm):
     fio = forms.RegexField(label="ФИО", regex=r'^[а-яА-ЯёЁ\s-]+$', max_length=128,
                            error_messages={'invalid': 'Только символы русского алфавита.'},
                            help_text='Обязательное поле. Не более 128 символов. Только буквы русского алфавита.')
 
     agreement = forms.BooleanField(label='Согласие на обработку персональных данных', required=True)
+
     # password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     # password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
 
@@ -38,6 +40,3 @@ class BidCreateForm(forms.ModelForm):
             'category',
             'img'
         )
-
-
-

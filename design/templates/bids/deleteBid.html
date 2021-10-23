@@ -9,10 +9,10 @@
 {% block title %} Delete Bid {% endblock %}
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    <p>Вы уверены что хотите удалить заявку?</p>
-    {% buttons submit='Да' type='submit' %} {% endbuttons %}
-</form>
+    <form method="post">
+        {% csrf_token %}
+        <p>Вы уверены что хотите удалить заявку?</p>
+        {% buttons submit='Да' type='submit' %} {% endbuttons %}
+    </form>
 
 {% endblock %}

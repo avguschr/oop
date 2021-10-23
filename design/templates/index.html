@@ -8,6 +8,7 @@
 
 {% block title %} Home {% endblock %}
 {% block content %}
+    <div>
     <div class="header container">
         <div class="row">
         <div class="for_text col-12">
@@ -22,36 +23,33 @@
         </div>
     </div>
     </div>
+    </div>
     <div class="container bids">
         <h2 class="title">Выполненные заявки</h2>
     </div>
     <div class=" container">
 
         <div class="row row-cols-1 row-cols-md-1 g-4">
-             {% if bids %}
-            {% for bid in bids %}
-        {% if bid.status == 'completed' %}
-  <div class="col">
-    <div class="card">
-      <img src="{{ bid.img_design.url }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title text-center fs-1">{{ bid.name }}</h5>
-          <p class="text-muted fs-4">{{ bid.date }}</p>
-          <p class="card-text fs-4">Автор: {{ bid.author }}</p>
-        <p class="card-text fs-2">{{ bid.description }}</p>
-          <p class="card-text fs-4">Категория: {{ bid.category }}</p>
-      </div>
-    </div>
+            {% if bids %}
+                {% for bid in bids %}
+                    {% if bid.status == 'completed' %}
+                        <div class="col">
+                            <div class="card">
+                                <img src="{{ bid.img_design.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center fs-1">{{ bid.name }}</h5>
+                                    <p class="text-muted fs-4">{{ bid.date }}</p>
+                                    <p class="card-text fs-4">Автор: {{ bid.author }}</p>
+                                    <p class="card-text fs-2">{{ bid.description }}</p>
+                                    <p class="card-text fs-4">Категория: {{ bid.category }}</p>
+                                </div>
+                            </div>
 
-  </div>
-{% endif %}
-            {% endfor %}
-        {% endif %}
-</div>
-
-
-
-
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
 
 
     </div>

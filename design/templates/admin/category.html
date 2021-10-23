@@ -9,17 +9,17 @@
 {% block title %} Admin {% endblock %}
 {% block content %}
 
-<h1>Категории</h1>
-<a class="btn btn-primary" href="/design/createCategory" role="button">Добавить категорию</a>
-{% if categories %}
-{% for cat in categories %}
-    <hr>
-    <h2>{{ cat.name }}</h2>
-    <a class="btn btn-primary" href="/design/{{cat.id}}/deleteCategory" role="button">Удалить</a>
+    <h1>Категории</h1>
+    <a class="btn btn-primary" href="/design/createCategory" role="button">Добавить категорию</a>
+    {% if categories %}
+        {% for cat in categories %}
+            <hr>
+            <h2>{{ cat.name }}</h2>
+            <a class="btn btn-primary" href="/design/{{ cat.id }}/deleteCategory" role="button">Удалить</a>
 
-    <hr>
-{% endfor %}
-{% endif %}
+            <hr>
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}
 

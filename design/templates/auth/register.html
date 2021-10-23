@@ -9,10 +9,10 @@
 {% block title %} Register {% endblock %}
 {% block content %}
 
-<form  method='post'>
-    {% csrf_token %}
-    {% bootstrap_form form layout='vertical' %}
-    {% buttons submit='Зарегистрироваться' type='submit' %} {% endbuttons %}
-</form>
+    <form method='post'>
+        {% csrf_token %}
+        {% bootstrap_form form layout='vertical' %}
+        {% buttons submit='Зарегистрироваться' type='submit' %} {% endbuttons %}
+    </form>
 
 {% endblock %}

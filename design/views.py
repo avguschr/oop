@@ -2,8 +2,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views import View
+from django.views.generic import CreateView, TemplateView
 from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
 
@@ -85,14 +87,24 @@ class DeleteBidView(DeleteView):
         return reverse_lazy('design:profile')
 
 
+# class ProfileView(TemplateView):
+#     def get(self, request, *args, **kwargs):
+#         if 'status' in request.GET:
+#             bids = Bid.objects.filter(author=request.user, status=request.GET['status']).order_by('-date')
+#         else:
+#             bids = Bid.objects.filter(author=request.user).order_by('-date')
+#
+#         context = {
+#             'user': request.user,
+#             'bids': bids
+#         }
+#         return render(request, 'profile.html', context)
+
+
 class ProfileView(ListView):
     model = Bid
     template_name = 'profile.html'
     context_object_name = 'bids'
-
-    def get_user(self, request):
-        user = request.user.username
-        return user
 
     def get_queryset(self):
         if not self.request.GET:
