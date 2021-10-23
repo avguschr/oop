@@ -9,22 +9,35 @@
 {% block title %} Admin {% endblock %}
 {% block content %}
 
-    <h1>Администрирование</h1>
-    {% if bids %}
-        {% for bid in bids %}
-            <hr>
-            <h2>{{ bid.name }}</h2>
-            <p>{{ bid.date }}</p>
-            <p>{{ bid.author }}</p>
-            <p>{{ bid.category }}</p>
-            <p>{{ bid.description }}</p>
-            <img src="{{ bid.img.url }}">
-            <p>{{ bid.status }}</p>
-
-            <a class="btn btn-primary" href="/design/{{ bid.id }}/updateBid" role="button">Редактировать</a>
-
-            <hr>
-        {% endfor %}
-    {% endif %}
+    <h2>Администрирование</h2>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-1 g-4">
+            {% if bids %}
+                {% for bid in bids %}
+                    <div class="col">
+                        <div class="card">
+                            {% if bid.img_design %}
+                                <img src="{{ bid.img_design.url }}" class="card-img-top" alt="...">
+                            {% else %}
+                                <img src="{{ bid.img.url }}" class="card-img-top" alt="...">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title text-center fs-1">{{ bid.name }}</h5>
+                                <p class="text-muted fs-4">{{ bid.date }}</p>
+                                <p class="card-text fs-4">Автор: {{ bid.author }}</p>
+                                <p class="card-text fs-2">{{ bid.description }}</p>
+                                <p class="card-text fs-4">Категория: {{ bid.category }}</p>
+                                <p class="card-text fs-4">Статус: {{ bid.get_status_display }}</p>
+                                {% if bid.status == 'new' %}
+                                    <a class="btn btn-secondary fs-5" href="{% url 'design:updateBid' pk=bid.id %}"
+                                       role="button">Редактировать</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}

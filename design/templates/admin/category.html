@@ -9,17 +9,24 @@
 {% block title %} Admin {% endblock %}
 {% block content %}
 
-    <h1>Категории</h1>
-    <a class="btn btn-primary" href="/design/createCategory" role="button">Добавить категорию</a>
-    {% if categories %}
-        {% for cat in categories %}
-            <hr>
-            <h2>{{ cat.name }}</h2>
-            <a class="btn btn-primary" href="/design/{{ cat.id }}/deleteCategory" role="button">Удалить</a>
+    <h2>Категории</h2>
+    <div class="container">
 
-            <hr>
-        {% endfor %}
-    {% endif %}
 
+        <a class="btn btn-secondary fs-5 mb-5" href="{% url 'design:createCategory' %} %}"
+           role="button">Создать категорию</a>
+        {% if categories %}
+            {% for cat in categories %}
+
+                <div class="card category">
+                    <div class="card-body">
+                        <p class="fs-3">{{ cat.name }}</p>
+                        <a class="btn btn-secondary fs-5" href="{% url 'design:deleteCategory' cat.id %}"
+                           role="button">Удалить</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
 

@@ -8,10 +8,11 @@
 
 {% block title %} Update bid {% endblock %}
 {% block content %}
-
+<h2>Редактировать заявку</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <select id="select" name='status' class="form-select" aria-label="Default select example">
+    <div class="container">
+        <select id="select" name='status' class="form-select status" aria-label="Default select example">
 
             {% if bid.status == 'new' %}
                 <option value='new'>Новая</option>
@@ -27,11 +28,12 @@
             {% endif %}
         </select>
 
-        <textarea name="comment" id="comment" class="form-control" placeholder="Введите комментарий здесь"></textarea>
+        <textarea name="comment" id="comment" class="form-control comment" placeholder="Введите комментарий здесь"></textarea>
 
-        <input type="file" name="img_design" class="form-control" id="img">
+        <input type="file" name="img_design" class="form-control design" id="img">
 
-        {% buttons submit='Отправить' type='submit' %} {% endbuttons %}
+        <button class="btn btn-secondary fs-5 mt-3" type='submit'>Сохранить</button>
+    </div>
     </form>
 
     <script>

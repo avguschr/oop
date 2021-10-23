@@ -8,11 +8,13 @@
 
 {% block title %} Register {% endblock %}
 {% block content %}
-
+    <h2>Регистрация</h2>
     <form method='post'>
         {% csrf_token %}
-        {% bootstrap_form form layout='vertical' %}
-        {% buttons submit='Зарегистрироваться' type='submit' %} {% endbuttons %}
+        <div class="container">
+            {% bootstrap_form form layout='vertical' %}
+            <button class="btn btn-secondary fs-5 mt-3" type='submit'>Зарегистрироваться</button>
+        </div>
     </form>
 
 {% endblock %}

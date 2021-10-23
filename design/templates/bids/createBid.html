@@ -8,11 +8,18 @@
 
 {% block title %} Create bid {% endblock %}
 {% block content %}
+    <h2>Создать заявку</h2>
+    <form method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            {% bootstrap_form form layout='vertical' exclude='img' %}
+            <div class="form-group">
+                <label for="formFileLg" class="form-label">Изображение</label>
+                <input type="file" name="img_design" class="form-control design" id="img">
+            </div>
+            <button class="btn btn-secondary fs-5 mt-3" type='submit'>Создать</button>
+        </div>
 
-<form  method='post' enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form layout='vertical' %}
-    {% buttons submit='Отправить' type='submit' %} {% endbuttons %}
-</form>
+    </form>
 
 {% endblock %}
