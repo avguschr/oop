@@ -28,10 +28,8 @@
                                 <p class="card-text fs-2">{{ bid.description }}</p>
                                 <p class="card-text fs-4">Категория: {{ bid.category }}</p>
                                 <p class="card-text fs-4">Статус: {{ bid.get_status_display }}</p>
-                                {% if bid.status == 'new' %}
                                     <a class="btn btn-secondary fs-5" href="{% url 'design:updateBid' pk=bid.id %}"
                                        role="button">Редактировать</a>
-                                {% endif %}
                             </div>
                         </div>
                     </div>

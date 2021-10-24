@@ -11,11 +11,14 @@
     <h2>Создать заявку</h2>
     <form method='post' enctype="multipart/form-data">
         {% csrf_token %}
+        {% if error %}
+        
+        {% endif %} 
         <div class="container">
             {% bootstrap_form form layout='vertical' exclude='img' %}
             <div class="form-group">
                 <label for="formFileLg" class="form-label">Изображение</label>
-                <input type="file" name="img_design" class="form-control design" id="img">
+                <input type="file" name="img" class="form-control design" id="img">
             </div>
             <button class="btn btn-secondary fs-5 mt-3" type='submit'>Создать</button>
         </div>
